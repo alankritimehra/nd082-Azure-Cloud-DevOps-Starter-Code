@@ -1,0 +1,31 @@
+{
+  "builders": [
+    {
+      "type": "azure-arm",
+      "use_azure_cli_auth": true,
+      "subscription_id": "fbf787c1-ed83-44ad-946e-6ff3b027c400",
+      "build_resource_group_name": "Azuredevops",
+      "managed_image_resource_group_name": "Azuredevops",
+      "managed_image_name": "udacityPackerImage",
+      "os_type": "Linux",
+      "image_publisher": "Canonical",
+      "image_offer": "UbuntuServer",
+      "image_sku": "18.04-LTS",
+      "vm_size": "Standard_B1s",
+      "azure_tags": {
+        "project": "Deploying Web Server in Azure",
+        "environment": "udacity"
+      }
+    }
+  ],
+  "provisioners": [
+    {
+      "inline": [
+        "echo 'Hello, World!' > index.html",
+        "nohup busybox httpd -f -p 80 &"
+      ],
+      "inline_shebang": "/bin/sh -x",
+      "type": "shell"
+    }
+  ]
+}
